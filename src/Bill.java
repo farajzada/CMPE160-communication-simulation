@@ -11,7 +11,11 @@ public class Bill {
         return (currentDebt + amount) <= limitingAmount;
     }
     public void add(double amount) {
-        currentDebt += amount;
+        if (check(amount)) {
+            currentDebt += amount;
+        }else {
+            System.out.println("You have not enough money");
+        }
     }
     public void pay(double amount) {
         currentDebt -= amount;
