@@ -5,12 +5,12 @@ public class Customer {
     Operator operator;
     Bill bill;
 
-    public Customer(int id, String name, int age, Operator operator, Bill bill) {
+    public Customer(int id, String name, int age, Operator operator, double limitingAmount) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.operator = operator;
-        this.bill = bill;
+        this.bill = new Bill(limitingAmount);
     }
 
     public void talk(int minute,Customer other) {
@@ -53,6 +53,10 @@ public class Customer {
         return operator;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setOperator(Operator operator) {
         this.operator = operator;
     }
@@ -64,4 +68,6 @@ public class Customer {
     public void setBill(Bill bill) {
         this.bill = bill;
     }
+
+
 }
