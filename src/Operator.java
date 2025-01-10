@@ -13,10 +13,18 @@ public class Operator {
         this.discountRate = discountRate;
     }
     public double calculateTalkingCost(int minute,Customer customer) {
-        return talkingCharge * minute;
+        double cost = talkingCharge * minute;
+        if (customer.getAge() < 18 || customer.getAge() > 65) {
+            cost -= cost * (discountRate / 100.0);
+        }
+        return cost;
     }
-    public double calculateMessageCost(int quantity,Customer customer,Customer other) {
-        return messageCost * quantity;
+    public double calculateMessageCost(int quantity,Customer sender,Customer receiver) {
+        double cost = quantity * messageCost;
+        if (sender.getOperator() == receiver.getOperator()) {
+            cost -= cost * (discountRate / 100.0); // Eyni operator üçün endirim
+        }
+        return cost;
     }
     public double calculateNetworkCost(double amount){
         return networkCharge * amount;
@@ -46,11 +54,16 @@ public class Operator {
         this.networkCharge = networkCharge;
     }
 
+
     public int getDiscountRate() {
         return discountRate;
     }
 
     public void setDiscountRate(int discountRate) {
         this.discountRate = discountRate;
+    }
+
+    public int getId() {
+        return id;
     }
 }
